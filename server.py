@@ -1,3 +1,4 @@
+import os
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 class RequestHandler(BaseHTTPRequestHandler):
@@ -19,4 +20,6 @@ def run(server_class=HTTPServer, handler_class=RequestHandler, port=3010):
     print(f'Starting server on port {port}...')
     httpd.serve_forever()
 
-run()
+PORT = os.getenv('PORT', '3010')
+
+run(HTTPServer, RequestHandler, int(PORT))
